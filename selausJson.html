@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+
+<!-- Bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--<script type="text/javascript" src="../js/jquery.validate.min.js"></script> -->
+
+<link rel="stylesheet" href="css/style" />
+
+<title>Selaa JSON</title>
+</head>
+<body>
+<header>
+<h1>Selaa json tietokanta</h1>
+</header>
+
+<div id="container">
+
+	<ul id="lista">
+	<!-- jQueryllä selataan tähän -->
+	</ul>
+
+<!-- Selataan tiedot ID mukaan. se on kesken -->
+<form id="tarkistaID">
+<input type="number" name="lastname">
+<input type="submit" value="tarkista">
+</form>	
+
+<ul id="listaKaksi">
+	<!-- jQueryllä selataan tähän -->
+</ul>
+	
+<script>
+$(document).ready(function(){  // hae tiedot suoraan
+    $.getJSON("tapahtumat.json", function(result){  // tiedoston osoite
+        $.each(result, function(index, value){    // mikä haetaan
+            $("#lista").append($("<li class='lista'></li>").text(value.tekijaID+" "+value.paiva  // lisäys paikka
+				+" "+value.kohde+" "+value.aika+" "+value.selite));
+        });
+    });
+});
+
+</script>
+</body>
+</html>

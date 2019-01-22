@@ -1,0 +1,82 @@
+[
+    {
+        "id": "80",
+        "tekijaID": "545",
+        "paiva": "2019-01-15",
+        "kohde": "Istanbul",
+        "aika": "03:55:00",
+        "selite": "yes"
+    },
+    {
+        "id": "81",
+        "tekijaID": "5453",
+        "paiva": "2019-01-15",
+        "kohde": "Berlin",
+        "aika": "03:55:00",
+        "selite": "no"
+    },
+    {
+        "id": "82",
+        "tekijaID": "10",
+        "paiva": "2019-01-15",
+        "kohde": "Istanbul",
+        "aika": "03:55:00",
+        "selite": "hyv\u00e4"
+    },
+    {
+        "id": "83",
+        "tekijaID": "10",
+        "paiva": "2019-01-15",
+        "kohde": "Helsinki",
+        "aika": "03:55:00",
+        "selite": "hyv\u00e4 oli kiva"
+    },
+    {
+        "id": "84",
+        "tekijaID": "25",
+        "paiva": "2019-01-21",
+        "kohde": "Oslo",
+        "aika": "03:45:00",
+        "selite": "salam"
+    },
+    {
+        "id": "84",
+        "tekijaID": "25",
+        "paiva": "2019-01-21",
+        "kohde": "Oslo",
+        "aika": "03:45:00",
+        "selite": "salam"
+    },
+    {
+        "id": "85",
+        "tekijaID": "36",
+        "paiva": "2019-01-21",
+        "kohde": "Hamburg",
+        "aika": "03:45:00",
+        "selite": "moi"
+    },
+    {
+        "id": "120",
+        "tekijaID": "4325",
+        "paiva": "0035-04-05",
+        "kohde": null,
+        "aika": null,
+        "selite": null
+    },
+    {
+        "id": "121",
+        "tekijaID": "4325",
+        "paiva": "0035-04-05",
+        "kohde": null,
+        "aika": null,
+        "selite": null
+    },
+    {
+        "id": "121",
+        "tekijaID": "4325",
+        "paiva": "0035-04-05",
+        "kohde": null,
+        "aika": null,
+        "selite": null
+    }
+]

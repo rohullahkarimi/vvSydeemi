@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+<meta charset="utf-8">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--<script type="text/javascript" src="../js/jquery.validate.min.js"></script> -->
+<!--<link rel="stylesheet" href="css/style" />-->
+
+
+<!--
+<script src="../js/main.js"></script>
+<script src="../js/formValidate.js"></script>
+-->
+
+
+<title>Selaa tapahtumat</title>
+</head>
+<body>
+<header>
+<h1 style="text-align: center;">Selaa kaikki tai ID mukaan</h1>
+</header>
+
+
+<!--
+	<ul id="lista">
+	 jQueryllä selataan tähän 
+	</ul> -->
+	
+	<!-- tarkista tiedot id mukaan-->
+	<div align="center">
+		<input type="text" name="search" id="search" placeholder="ID tai Kohde">
+	</div>
+	<ul class="list-group" id="result"></ul>
+	
+	<ul id="listaById">
+	<!-- jQueryllä selataan tähän -->
+	</ul>
+<script>
+
+/*
+$(document).ready(function() {
+	$.ajax({
+		url: "tapahtumat.json",
+		dataType: "json",
+		success: function(data) { // data = palautettava json
+			$.each(data, function( index, value ) {
+				//alert("toimii");
+				 $("#lista").append($("<li class='lista'></li>").text(value.tekijaID+" "+value.paiva  // lisäys paikka
+				+" "+value.kohde+" "+value.aika+" "+value.selite));
+			});
+			
+			$.getJSON('tapahtumat.json', function(index, value) {
+				alert("by id ");
+				 $("#listaById").append($("<li class='listaById'></li>").text(value.tekijaID));
+			});
+			
+			
+		}
+	});		
+});	
+*/
+$(document).ready(function() {
+	$('#search').keyup(function() {
+		$('#result').html('');
+		var searchField = $('#search').val();
+		var expression = new RegExp(searchField, "i");
+		$.getJSON('tapahtumat.json', function(data){
+			$.each(data, function(key, value){
+				if(value.tekijaID.search(expression) != -1 || value.kohde.search(
+					expression) != -1)
+				{
+						 $("#result").append($("<li class='list-group'></li>").text(value.tekijaID+" "+value.paiva  // lisäys paikka
+						+" "+value.kohde+" "+value.aika+" "+value.selite));
+				}
+			});
+		});
+		
+	});		
+});	
+
+</script>
+</body>
+</html>
