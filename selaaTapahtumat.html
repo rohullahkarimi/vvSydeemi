@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+<meta charset="utf-8">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<title>Selaa tapahtumat</title>
+</head>
+<body>
+<div id="container">
+<header>
+<h1 style="text-align: center;">Selaa kaikki tai ID mukaan</h1>
+</header>
+
+
+<!-- Get Search by ID-->
+<form action="">
+  <input id="user_id" type="number">
+	<input id="findID" type="submit" value="tarkista">
+	<input id="getfindAll" type="hidden" value="123"/>
+	<input id="findAll" type="submit" value="Näyttää kaikki">
+</form>
+
+<ul id="listaforAll">
+<!-- Get jquery each data from php file -->
+</ul>
+
+<ul id="lista">
+<!-- Get jquery data by ID from php file as json type -->
+</ul>
+
+</div>
+<script>
+/* Rohullah Karimi 2019 */
+
+// search all data 
+$(document).ready(function(){
+	$("#findAll").click(function(){
+	// AJAX Code To Submit Form.
+	//var findAll = $("#findAll").val(); // save input value as varible
+	$.ajax({
+		type: "POST",
+		url: "selaaTapahtumat.php",
+		processData: true,
+		data: {findAll: $("#getfindAll").val()},
+		dataType: "json",
+		cache: false,
+		success: function(data){
+		
+			$.each(data.tapahtumat, function( index, value ) {
+				//alert("toimii");
+				 $("#listaforAll").append($("<li class='lista'></li>").text(value.tekijaID+" "+value.paiva  // lisäys paikka
+				+" "+value.kohde+" "+value.aika+" "+value.selite));
+			});
+		},
+			// check for errors
+			
+			error:function(x,e) {
+				if (x.status==0) {
+					alert('You are offline!!\n Please Check Your Network.');
+				} else if(x.status==404) {
+					alert('Requested URL not found.');
+				} else if(x.status==500) {
+					alert('Internel Server Error.');
+				} else if(e=='parsererror') {
+					alert('Error.\nParsing JSON Request failed.');
+				} else if(e=='timeout'){
+					alert('Request Time out.');
+				} else {
+					alert('Unknow Error.\n'+x.responseText);
+				} 
+			}
+		});
+		return false;
+	});
+});
+</script>
+<script>
+/* Rohullah Karimi 2019 */
+
+// search all data 
+$(document).ready(function(){
+// if user want to search by data by ID and click tarkista
+$("#findID").click(function(){  // when submit button click
+	var tekijaID = $("#user_id").val(); // save input value as varible
+	if(tekijaID==''){
+	alert("Please Fill All Fields");  // if input is empty alery 
+	}else{ 
+		// AJAX Code To Submit Form.
+		$.ajax({
+			type: "POST",
+			url: "selaaTapahtumatbyID.php",
+			processData: true,
+			data: {tekijaID: $("#user_id").val()},
+			dataType: "json",
+			cache: false,
+			
+			success: function(data){
+				//console.log('toimii loop');
+				$.each(data.tapahtumat, function( index, value ) {
+						//alert("toimii");
+						 $("#lista").append($("<li class='lista'></li>").text(value.tekijaID+" "+value.paiva  // lisäys paikka
+						+" "+value.kohde+" "+value.aika+" "+value.selite));
+				});
+			},
+			// check for errors
+			
+			error:function(x,e) {
+				if (x.status==0) {
+					alert('You are offline!!\n Please Check Your Network.');
+				} else if(x.status==404) {
+					alert('Requested URL not found.');
+				} else if(x.status==500) {
+					alert('Internel Server Error.');
+				} else if(e=='parsererror') {
+					alert('Error.\nParsing JSON Request failed.');
+				} else if(e=='timeout'){
+					alert('Request Time out.');
+				} else {
+					alert('Unknow Error.\n'+x.responseText);
+				}
+			} 
+		});
+	}
+	return false;
+});
+});
+</script>
+<script>
+/*
+$(document).ready(function() {
+	$.ajax({
+		url: "tapahtumat.json",
+		dataType: "json",
+		success: function(data) { // data = palautettava json
+			$.each(data, function( index, value ) {
+				//alert("toimii");
+				 $("#lista").append($("<li class='lista'></li>").text(value.tekijaID+" "+value.paiva  // lisäys paikka
+				+" "+value.kohde+" "+value.aika+" "+value.selite));
+			});
+			
+			$.getJSON('tapahtumat.json', function(index, value) {
+				alert("by id ");
+				 $("#listaById").append($("<li class='listaById'></li>").text(value.tekijaID));
+			});
+			
+			
+		}
+	});		
+});	
+*/
+
+/* Rohullah Karimi 2019 */
+/*
+$(document).ready(function() {
+	$('#search').keyup(function() {
+		$('#result').html('');
+		var searchField = $('#search').val();
+		var expression = new RegExp(searchField, "i");
+		$.getJSON('tapahtumat.json', function(data){
+			$.each(data, function(key, value){
+				if(value.tekijaID.search(expression) != -1 || value.kohde.search(
+					expression) != -1)
+				{
+						 $("#result").append($("<li class='list-group'></li>").text(value.tekijaID+" "+value.paiva  // lisäys paikka
+						+" "+value.kohde+" "+value.aika+" "+value.selite));
+				}
+			});
+		});
+		
+	});		
+});	*/
+//------------------------End-------------//
+</script>
+</body>
+</html>
