@@ -5,6 +5,7 @@
 -Store data temporary in JSON
 -Insert form data to database using PHP
 -Load JSON data to html file
+-Load php  data as json type to html file / New version
 
 
 
