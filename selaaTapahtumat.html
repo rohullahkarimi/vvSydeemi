@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+<meta charset="utf-8">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<title>Selaa tapahtumat</title>
+</head>
+<body>
+<div id="container">
+	<header>
+		<h1 style="text-align: center;">Selaa kaikki tai tekija ID/ kohde mukaan</h1>
+	</header>
+	<!-- Live search  -->
+	<div align="center">		<!-- Search by id   -->
+		<input type="text" name="search" id="search" placeholder="Search" class="form-control"/>
+	</div>
+	<ul class="list-group" id="result"></ul> <!-- Get data of Live search  -->
+	<br />
+
+</div>
+
+<script>
+/* Rohullah Karimi 2019 */
+
+$(document).ready(function() {
+	$('#search').keyup(function() {
+		$('#result').html('');
+		var searchField = $('#search').val(); // hae search value
+		var expression = new RegExp(searchField, "i");
+		
+		$.ajax({
+		type: "POST",
+		url: "selaaTapahtumat.php", // hae tästä tiedostosta tiedot json muodolla 
+		processData: true,
+		//data: {findAll: $("#getfindAll").val()},
+		dataType: "json",
+		cache: false, 
+		success: function(data){
+			$.each(data.tapahtumat, function(key, value){ // data.tapahtumat hae tapahtumat tiedot
+				if(value.tekijaID.search(expression) != -1 || value.kohde.search( // voi hakea tiedot tekjjaID tai kohde mukaan
+					expression) != -1)
+				{         // näyttää tulos result divillä
+						 $("#result").append($("<li class='list-group'></li>").text(value.tekijaID+" "+value.paiva  // lisäys paikka
+						+" "+value.kohde+" "+value.aika+" "+value.selite));
+				}
+			});
+		},
+		});
+		
+	});		
+});	
+</script>
+
+</body>
+</html>
